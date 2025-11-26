@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fittrack_app/data/local/workout_adapter.dart'; // Import initHive
 
-void main() {
+void main() async { // Made main an async function
+  WidgetsFlutterBinding.ensureInitialized();
+  await initHive();
   runApp(const MyApp());
 }
 
