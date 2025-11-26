@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'user.g.dart';
 
-@HiveType(typeId: 4) // Use the next available typeId
+@HiveType(typeId: 4)
 class User extends HiveObject {
   @HiveField(0)
   late String username;
@@ -10,5 +10,20 @@ class User extends HiveObject {
   @HiveField(1)
   late String password; // In a real app, store hashed passwords
 
-  User({required this.username, required this.password});
+  @HiveField(2)
+  double? height; // in cm
+
+  @HiveField(3)
+  double? weight; // in kg
+
+  @HiveField(4)
+  String? fitnessGoals;
+
+  User({
+    required this.username,
+    required this.password,
+    this.height,
+    this.weight,
+    this.fitnessGoals,
+  });
 }
