@@ -45,4 +45,29 @@ class UserRepository {
   String? getCurrentUsername() {
     return _prefs.getString(_currentUsernameKey);
   }
+
+  // New method to get the currently logged-in user
+  User? get currentUser {
+    final username = getCurrentUsername();
+    if (username != null) {
+      return _userBox.get(username);
+    }
+    return null;
+  }
+
+  // New method to update user profile
+  Future<void> updateUserProfile({
+    required String username,
+    double? height,
+    double? weight,
+    String? fitnessGoals,
+  }) async {
+    final user = _userBox.get(username);
+    if (user != null) {
+      user.height = height ?? user.height;
+      user.weight = weight ?? user.weight;
+      user.fitnessGoals = fitnessGoals ?? user.fitnessGoals;
+      await user.save();
+    }
+  }
 }
