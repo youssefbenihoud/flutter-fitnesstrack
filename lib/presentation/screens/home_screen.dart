@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fittrack_app/business_logic/bloc/workout_bloc.dart';
+import 'package:fittrack_app/business_logic/bloc/auth_bloc.dart'; // Import AuthBloc
 import 'package:fittrack_app/presentation/screens/create_workout_screen.dart';
 import 'package:fittrack_app/presentation/screens/settings_screen.dart';
 import 'package:fittrack_app/presentation/screens/workout_screen.dart';
@@ -25,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('FitTrack'),
-        // Actions automatically styled by AppBarTheme
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -37,6 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
           ),
+          IconButton( // Logout button
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              context.read<AuthBloc>().add(LoggedOut());
+            },
+          ),
         ],
       ),
       body: BlocBuilder<WorkoutBloc, WorkoutState>(
@@ -46,11 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
           } else if (state is WorkoutLoaded) {
             if (state.workouts.isEmpty) {
               return Padding(
-                padding: const EdgeInsets.all(16.0), // Added padding
+                padding: const EdgeInsets.all(16.0),
                 child: Center(
                   child: Text(
                     'No workouts yet. Start by creating one!',
-                    style: Theme.of(context).textTheme.headlineSmall, // Themed text
+                    style: Theme.of(context).textTheme.headlineSmall,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -95,7 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
           return const Center(child: Text('Unknown state'));
         },
       ),
-      // FloatingActionButton already styled by FloatingActionButtonThemeData
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
