@@ -19,7 +19,8 @@ class WorkoutCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(8.0),
-      child: InkWell( // Use InkWell for onTap
+      child: InkWell(
+        // Use InkWell for onTap
         onTap: onTap, // Assign onTap
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -38,16 +39,14 @@ class WorkoutCard extends StatelessWidget {
                 (exercise) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 2.0),
                   child: Text(
-                      '${exercise.name}: ${exercise.sets} sets of ${exercise.reps} reps at ${exercise.weight}'),
+                    '${exercise.name}: ${exercise.sets} sets of ${exercise.reps} reps at ${exercise.weight}',
+                  ),
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: onEdit,
-                  ),
+                  IconButton(icon: const Icon(Icons.edit), onPressed: onEdit),
                   IconButton(
                     icon: const Icon(Icons.delete),
                     onPressed: onDelete,
@@ -57,6 +56,7 @@ class WorkoutCard extends StatelessWidget {
             ],
           ),
         ),
+      ),
     );
   }
 }
