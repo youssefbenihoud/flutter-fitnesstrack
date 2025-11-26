@@ -5,19 +5,23 @@ class WorkoutCard extends StatelessWidget {
   final Workout workout;
   final VoidCallback onDelete;
   final VoidCallback onEdit;
+  final VoidCallback? onTap; // Added onTap
 
   const WorkoutCard({
     super.key,
     required this.workout,
     required this.onDelete,
     required this.onEdit,
+    this.onTap, // Added to constructor
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(8.0),
-      child: Padding(
+      child: InkWell( // Use InkWell for onTap
+        onTap: onTap, // Assign onTap
+        child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

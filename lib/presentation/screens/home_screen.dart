@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fittrack_app/business_logic/bloc/workout_bloc.dart';
-import 'package:fittrack_app/presentation/screens/create_workout_screen.dart'; // Import
-import 'package:fittrack_app/presentation/screens/settings_screen.dart';       // Import
+import 'package:fittrack_app/presentation/screens/create_workout_screen.dart';
+import 'package:fittrack_app/presentation/screens/settings_screen.dart';
+import 'package:fittrack_app/presentation/screens/workout_screen.dart'; // Import
 import 'package:fittrack_app/presentation/widgets/workout_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -60,10 +61,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (_) => CreateWorkoutScreen(
-                          // Pass workout for editing
                           // For now, it's a new workout screen, later can be adapted for edit
                           // This would typically be an EditWorkoutScreen
                         ),
+                      ),
+                    );
+                  },
+                  onTap: () { // Add onTap to navigate to WorkoutScreen
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => WorkoutScreen(workout: workout),
                       ),
                     );
                   },
