@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fittrack_app/business_logic/bloc/workout_bloc.dart';
 import 'package:fittrack_app/presentation/screens/create_workout_screen.dart';
 import 'package:fittrack_app/presentation/screens/settings_screen.dart';
-import 'package:fittrack_app/presentation/screens/workout_screen.dart'; // Import
+import 'package:fittrack_app/presentation/screens/workout_screen.dart';
 import 'package:fittrack_app/presentation/widgets/workout_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('FitTrack'),
+        // Actions automatically styled by AppBarTheme
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -44,8 +45,15 @@ class _HomeScreenState extends State<HomeScreen> {
             return const Center(child: CircularProgressIndicator());
           } else if (state is WorkoutLoaded) {
             if (state.workouts.isEmpty) {
-              return const Center(
-                child: Text('No workouts yet. Start by creating one!'),
+              return Padding(
+                padding: const EdgeInsets.all(16.0), // Added padding
+                child: Center(
+                  child: Text(
+                    'No workouts yet. Start by creating one!',
+                    style: Theme.of(context).textTheme.headlineSmall, // Themed text
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               );
             }
             return ListView.builder(
@@ -61,13 +69,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (_) => CreateWorkoutScreen(
-                          // For now, it's a new workout screen, later can be adapted for edit
-                          // This would typically be an EditWorkoutScreen
+                          // Pass workout for editing
                         ),
                       ),
                     );
                   },
-                  onTap: () { // Add onTap to navigate to WorkoutScreen
+                  onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (_) => WorkoutScreen(workout: workout),
@@ -78,11 +85,17 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             );
           } else if (state is WorkoutError) {
-            return Center(child: Text('Error: ${state.message}'));
+            return Center(
+              child: Text(
+                'Error: ${state.message}',
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.error),
+              ),
+            );
           }
           return const Center(child: Text('Unknown state'));
         },
       ),
+      // FloatingActionButton already styled by FloatingActionButtonThemeData
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(

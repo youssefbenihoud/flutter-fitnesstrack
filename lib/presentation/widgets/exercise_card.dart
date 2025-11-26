@@ -65,31 +65,34 @@ class _ExerciseCardState extends State<ExerciseCard> {
                 Expanded(
                   child: TextField(
                     controller: _nameController,
-                    decoration: const InputDecoration(labelText: 'Exercise Name'),
+                    decoration: InputDecoration(labelText: 'Exercise Name'), // Using themed InputDecoration
                     onChanged: (_) => _onChanged(),
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.delete),
+                  icon: Icon(Icons.delete, color: Theme.of(context).colorScheme.error),
                   onPressed: widget.onDelete,
                 ),
               ],
             ),
+            const SizedBox(height: 8.0), // Added spacing
             TextField(
               controller: _setsController,
-              decoration: const InputDecoration(labelText: 'Sets'),
+              decoration: InputDecoration(labelText: 'Sets'), // Using themed InputDecoration
               keyboardType: TextInputType.number,
               onChanged: (_) => _onChanged(),
             ),
+            const SizedBox(height: 8.0), // Added spacing
             TextField(
               controller: _repsController,
-              decoration: const InputDecoration(labelText: 'Reps'),
+              decoration: InputDecoration(labelText: 'Reps'), // Using themed InputDecoration
               keyboardType: TextInputType.number,
               onChanged: (_) => _onChanged(),
             ),
+            const SizedBox(height: 8.0), // Added spacing
             TextField(
               controller: _weightController,
-              decoration: const InputDecoration(labelText: 'Weight'),
+              decoration: InputDecoration(labelText: 'Weight'), // Using themed InputDecoration
               keyboardType: TextInputType.number,
               onChanged: (_) => _onChanged(),
             ),
