@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fittrack_app/business_logic/bloc/workout_bloc.dart';
-import 'package:fittrack_app/business_logic/bloc/auth_bloc.dart'; // Import AuthBloc
+import 'package:fittrack_app/business_logic/bloc/auth_bloc.dart';
 import 'package:fittrack_app/presentation/screens/create_workout_screen.dart';
 import 'package:fittrack_app/presentation/screens/settings_screen.dart';
 import 'package:fittrack_app/presentation/screens/workout_screen.dart';
+import 'package:fittrack_app/presentation/screens/profile_screen.dart'; // Import ProfileScreen
 import 'package:fittrack_app/presentation/widgets/workout_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,6 +29,16 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('FitTrack'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.person), // Profile button
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => const ProfileScreen(),
+                ),
+              );
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
               Navigator.of(context).push(
@@ -37,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
           ),
-          IconButton( // Logout button
+          IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
               context.read<AuthBloc>().add(LoggedOut());
