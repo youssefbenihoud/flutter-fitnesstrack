@@ -4,6 +4,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:fittrack_app/business_logic/models/exercise.dart';
 import 'package:fittrack_app/business_logic/models/workout.dart';
 import 'package:fittrack_app/business_logic/models/settings.dart';
+import 'package:fittrack_app/business_logic/models/user.dart'; // Import User model
 
 Future<void> initHive() async {
   if (!kIsWeb) {
@@ -17,4 +18,5 @@ Future<void> initHive() async {
   Hive.registerAdapter(WorkoutAdapter());
   Hive.registerAdapter(WeightUnitAdapter());
   Hive.registerAdapter(SettingsAdapter());
+  Hive.registerAdapter(UserAdapter()); // Register UserAdapter
 }
